@@ -1,0 +1,24 @@
+{
+  "name": "MIXI",
+  "homepage": "https://github.com/CRONWMMM/DesktopApp",
+  "authors": [
+    "CRONWMMM <kimmmiy@sina.cn>"
+  ],
+  "description": "This is a DesktopApp, it's name is MIXI",
+  "main": "",
+  "keywords": [
+    "MIXI"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "^2.3.5",
+    "angular": "^1.6.6"
+  }
+}
