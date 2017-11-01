@@ -17,5 +17,8 @@
     "test",
     "tests"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "requirejs": "^2.3.5",
+    "jQuery": "^3.2.1"
+  }
 }
