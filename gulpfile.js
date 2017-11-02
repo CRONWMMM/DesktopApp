@@ -1,5 +1,5 @@
 var gulp = require("gulp");
-var $ = require("gulp-load-plugins");
+var $ = require("gulp-load-plugins")();
 var open = require("open");
 
 var app = {
@@ -23,4 +23,27 @@ gulp.task("html",function(){
 		.pipe(gulp.dest(app.devPath))
 		.pipe(gulp.dest(app.prdPath));
 });
+
+// 构建scss文件
+gulp.task("scss",function(){
+	gulp.src(app.staticPath + "sass/main.scss")
+		.pipe($.sass())
+		.pipe(gulp.dest(app.devPath + "css"))
+		.pipe($.cssmin())
+		.pipe(gulp.dest(app.prdPath + "css"));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
