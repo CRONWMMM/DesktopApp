@@ -1,0 +1,13 @@
+.window{
+	display: block;
+	width: $window-width;
+	height: $window-height;
+	margin-left: -($window-width/2);
+	margin-top: -($window-height/2);
+	top: 50%;
+	left: 50%;
+	border-radius: $window-radius;
+	box-shadow: $window-shadow;
+	background-color: $window-bgc;
+}
+

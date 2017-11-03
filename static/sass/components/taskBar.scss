@@ -1,0 +1,19 @@
+.taskBar{
+	left: 0;
+	right: 0;
+
+	height: $taskBar-height;
+	line-height: $taskBar-height;
+	background-color: $taskBar-bgc;
+	border-top: 1px solid #fff;
+
+	box-shadow: $taskBar-shadow;
+}
+// start
+#start{
+	width: 60px;
+	height: 100%;
+	line-height: inherit;
+	color: #fff;
+	background-color: #282879;
+}

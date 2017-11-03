@@ -1,8 +1,6 @@
-footer{
-	.abs{
-		color: #333;
-		.sas{
-			background-color: #444;
-		}
-	}
-}
+@import "configs/variable.scss";
+@import "common/common.scss";
+@import "common/utils.scss";
+@import "components/taskBar.scss";
+@import "components/window.scss";
+
