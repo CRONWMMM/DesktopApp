@@ -1,49 +1,55 @@
-var gulp = require("gulp");
-var $ = require("gulp-load-plugins")();
-var open = require("open");
+const gulp = require('gulp');
+// const $ = require('gulp-load-plugins')();
+const rename = require('gulp-rename');
+const rev = require('gulp-rev');
+const revCollector = require('gulp-rev-collector');
+const sass = require('gulp-sass');
+const cssmin = require('gulp-cssmin');
+const jshint = require('gulp-jshint');
+const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
+const htmlmin = require('gulp-htmlmin');
+const imagemin = require('gulp-imagemin');
+const base64 = require('gulp-base64');
 
-var app = {
-	libsPath   : "libs/",		// 依赖库
-	staticPath : "static/",		// 源代码
-	devPath    : "build/",		// 生产环境
-	prdPath    : "dist/"		// 发布环境
+
+const config = {
+	libPath: '',				// 依赖
+	srcPath: 'src/',			// 源码
+	devPath: 'build/',			// 生产
+	prdPath: 'dist/'			// 发布
 };
 
 
-// 构建依赖库
-gulp.task("lib",function(){
-	gulp.src(app.libsPath + "**/*")
-		.pipe(gulp.dest(app.devPath + "libs"))
-		.pipe(gulp.dest(app.prdPath + "libs"));
+gulp.task('js', () => {
+	return gulp.src(config.srcPath + 'js/**/*.js')
+				.pipe(uglify())
+				.pipe(rev())
+				.pipe(gulp.dest(config.devPath + 'js'))
+				.pipe(gulp.dest(config.prdPath + 'js'))
+				.pipe(rev.manifest())
+				.pipe(gulp.dest('rev/js'));
 });
 
-// 构建html
-gulp.task("html",function(){
-	gulp.src(app.staticPath + "**/*.html")
-		.pipe(gulp.dest(app.devPath))
-		.pipe(gulp.dest(app.prdPath));
+gulp.task('sass', ['js'], () => {
+
+	return gulp.src(config.srcPath + 'sass/**/*.scss')
+				.pipe(sass().on('error', sass.logError))
+				.pipe(rev())
+				.pipe(gulp.dest(config.devPath + 'css'))
+				.pipe(cssmin())
+				.pipe(gulp.dest(config.prdPath + 'css'))
+				.pipe(rev.manifest())
+				.pipe(gulp.dest('rev/css'));
+
 });
 
-// 构建scss文件
-gulp.task("scss",function(){
-	gulp.src(app.staticPath + "sass/main.scss")
-		.pipe($.sass())
-		.pipe(gulp.dest(app.devPath + "css"))
-		.pipe($.cssmin())
-		.pipe(gulp.dest(app.prdPath + "css"));
-});
+gulp.task('html', ['js', 'sass'], () => {
 
+	return gulp.src(['rev/**/*.json', config.srcPath + 'views/**/*.html'])
+				.pipe(revCollector())
+				.pipe(gulp.dest(config.devPath + 'views'))
+				.pipe(gulp.dest(config.prdPath + 'views'))
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+gulp.task('build', ['js', 'sass', 'html'], () => {});
