@@ -42,10 +42,10 @@ gulp.task('js', ['clean'], () => {
 gulp.task('sass', ['js'], () => {
 	return gulp.src(`${config.srcPath}sass/**/*.scss`)
 				.pipe(sass().on('error', sass.logError))
+        		.pipe(cssmin())
         		.pipe(gulp.dest(`${config.srcPath}css`))
 				.pipe(rev())
-				.pipe(gulp.dest(`${config.devPath}css`))
-				.pipe(cssmin())
+        		.pipe(gulp.dest(`${config.devPath}css`))
 				.pipe(gulp.dest(`${config.prdPath}css`))
 				.pipe(rev.manifest())
 				.pipe(gulp.dest('rev/css'));
